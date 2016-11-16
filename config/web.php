@@ -10,6 +10,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '7UonE7p-L3qe-RSl2byO7t9ehdq7Vdtm',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -51,6 +54,10 @@ $config = [
                 'ratings' => 'rating/index',
                 'readers' => 'reader/index',
 
+                'api/readers' => 'api/reader/index',
+                'api/books' => 'api/book/index',
+                'api/ratings' => 'api/rating/index',
+
                 '<_c:[\w\-]+>/<_a:[\w\-]+>' => '<_c>/<_a>',
                 '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
                 '<_c:[\w\-]+>' => '<_c>/index',
@@ -60,6 +67,11 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/rating'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/reader'],
             ],
+        ],
+    ],
+    'modules' => [
+        'api' => [
+            'class' => 'app\api\Module',
         ],
     ],
     'params' => $params,
