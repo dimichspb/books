@@ -38,15 +38,29 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'site/index',
+                'login' => 'site/login',
+                'logout' => 'site/logout',
+
+                'users' => 'user/index',
+                'books' => 'book/index',
+                'ratings' => 'rating/index',
+                'readers' => 'reader/index',
+
+                '<_c:[\w\-]+>/<_a:[\w\-]+>' => '<_c>/<_a>',
+                '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
+                '<_c:[\w\-]+>' => '<_c>/index',
+                '<_c:[\w\-]+>/<_a:[\w\-]+>/<id:\d+>' => '<_c>/<_a>',
+
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/book'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/rating'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/reader'],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
