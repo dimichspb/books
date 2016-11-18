@@ -52,4 +52,5 @@ class m161116_212812_import_sql_dumps extends Migration
 
         fclose($fileHandle);
     }
+
 }

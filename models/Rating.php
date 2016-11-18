@@ -44,6 +44,26 @@ class Rating extends \yii\db\ActiveRecord
             'Book_Rating' => 'Book  Rating',
         ];
     }
+    
+    public function getLocation()
+    {
+        return $this->hasOne(Location::className(), ['User_ID' => 'User_ID'])->via('reader');
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(City::className(), ['City_ID' => 'City_ID'])->via('location');
+    }
+
+    public function getState()
+    {
+        return $this->hasOne(State::className(), ['State_ID' => 'State_ID'])->via('location');
+    }
+
+    public function getCountry()
+    {
+        return $this->hasOne(Country::className(), ['Country_ID' => 'Country_ID'])->via('location');
+    }
 
     public function getReader()
     {
@@ -55,10 +75,15 @@ class Rating extends \yii\db\ActiveRecord
         return $this->hasOne(Book::className(), ['ISBN' => 'ISBN']);
     }
 
-    public static function getRatingsByCountry()
+    public static function getRatingsByParams()
     {
-        $country = Yii::$app->request->get('country');
+        $params = [
+            'RatingSearch' => Yii::$app->request->queryParams
+        ];
 
-        return self::find()->joinWith('reader');
+        $searchModel = new RatingSearch();
+        $dataProvider = $searchModel->search($params);
+        
+        return $dataProvider;
     }
 }

@@ -27,6 +27,7 @@ class City extends \yii\db\ActiveRecord
     {
         return [
             [['Name'], 'required'],
+            [['Name'], 'unique'],
             [['Name'], 'string', 'max' => 255],
         ];
     }

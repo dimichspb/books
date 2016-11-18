@@ -8,17 +8,17 @@ class m161116_231119_create_city_state_country_tables extends Migration
     {
         $this->createTable('bx_city', [
             'City_ID' => $this->primaryKey(),
-            'Name' => $this->string()->notNull(),
+            'Name' => $this->string()->notNull()->unique(),
         ]);
 
         $this->createTable('bx_state', [
             'State_ID' => $this->primaryKey(),
-            'Name' => $this->string()->notNull(),
+            'Name' => $this->string()->notNull()->unique(),
         ]);
 
         $this->createTable('bx_country', [
             'Country_ID' => $this->primaryKey(),
-            'Name' => $this->string()->notNull(),
+            'Name' => $this->string()->notNull()->unique(),
         ]);
     }
 

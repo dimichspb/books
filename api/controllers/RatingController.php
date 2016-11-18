@@ -40,7 +40,7 @@ class RatingController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        $actions['index']['prepareDataProvider'] = [new $this->modelClass, 'getRatingsByCountry']; // replacing default DataProvider
+        $actions['index']['prepareDataProvider'] = [new $this->modelClass, 'getRatingsByParams']; // replacing default DataProvider
         return $actions;
     }
 
