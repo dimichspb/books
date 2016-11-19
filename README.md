@@ -104,6 +104,12 @@ admin/admin
 - Current version supports only actions: view list of the books, view particular book with ratings, view list of the readers, view particular reader with ratings
 
 
+TESTS
+-----
+
+No tests has been implemented in current version
+
+
 RESTful API reference
 ---------------------
 
