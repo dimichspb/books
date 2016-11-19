@@ -89,11 +89,16 @@ For example, `vhosts.conf`:
 ```
 
 
-WORKING
--------
+WORK
+----
 
 Now you are able to use the project!
 Just open http://books.dev in your favorite browser and have fun!
+
+## Default user details.
+~~~
+admin/admin
+~~~
 
 **NOTES:**
 - Current version supports only actions: view list of the books, view particular book with ratings, view list of the readers, view particular reader with ratings
