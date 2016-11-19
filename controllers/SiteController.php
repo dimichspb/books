@@ -62,7 +62,8 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
+    
+    
     /**
      * Login action.
      *
@@ -76,6 +77,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            Yii::$app->session->addFlash('info', 'Your access-token is ' . Yii::$app->user->identity->getAuthKey());
             return $this->goBack();
         }
         return $this->render('login', [

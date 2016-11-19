@@ -95,6 +95,9 @@ WORKING
 Now you are able to use the project!
 Just open http://books.dev in your favorite browser and have fun!
 
+**NOTES:**
+- Current version supports only actions: view list of the books, view particular book with ratings, view list of the readers, view particular reader with ratings
+
 
 RESTful API reference
 ---------------------
@@ -117,19 +120,19 @@ GET /api/book/:ISDN
 3. Update book:
 
 ~~~
-PUT /api/book/:ISDN
+PUT /api/book/update/:ISDN
 ~~~
 
 4. Create book:
 
 ~~~
-POST /api/book
+POST /api/book/create
 ~~~
 
 5. Delete book:
 
 ~~~
-DELETE /api/book/:ISDN
+DELETE /api/book/delete/:ISDN
 ~~~
 
 ### Users (Readers)
@@ -150,19 +153,19 @@ GET /api/reader/:User_ID
 3. Update reader:
 
 ~~~
-PUT /api/reader/:User_ID
+PUT /api/reader/update/:User_ID
 ~~~
 
 4. Create reader:
 
 ~~~
-POST /api/reader
+POST /api/reader/create
 ~~~
 
 5. Delete reader:
 
 ~~~
-DELETE /api/reader/:User_ID
+DELETE /api/reader/delete/:User_ID
 ~~~
 
 
@@ -185,21 +188,22 @@ GET /api/ratings?Country_Name=:Country_Name
 3. Update rating:
 
 ~~~
-PUT /api/rating?ISBN=:ISBN&User_ID=:User_ID
+PUT /api/rating/update?ISBN=:ISBN&User_ID=:User_ID
 ~~~
 
 4. Create rating:
 
 ~~~
-POST /api/rating
+POST /api/rating/create
 ~~~
 
 5. Delete rating:
 
 ~~~
-DELETE /api/rating/?ISBN=:ISBN&User_ID=:User_ID
+DELETE /api/rating/delete?ISBN=:ISBN&User_ID=:User_ID
 ~~~
 
 
 **NOTES:**
 - Please use ?page= parameter for pagination
+- Please don't forget to use ?access-token= parameter for authentication

@@ -64,11 +64,9 @@ class RatingSearch extends Rating
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'User_ID' => $this->User_ID,
-            'Book_Rating' => $this->Book_Rating,
+            'bx_book_ratings.User_ID' => $this->User_ID,
+            'bx_book_ratings.ISBN' => $this->ISBN,
         ]);
-
-        $query->andFilterWhere(['like', 'ISBN', $this->ISBN]);
 
         $query->andFilterWhere(['like', 'bx_country.Name', $this->Country_Name]);
 

@@ -26,7 +26,7 @@ class ReaderController extends ActiveController
         $behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_JSON; //setting JSON as default reply
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
-            'except' => ['index'],
+            'except' => ['index','view'],
             'authMethods' => [
                 HttpBasicAuth::className(),
                 HttpBearerAuth::className(),

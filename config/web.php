@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'name' => 'Books directory',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
@@ -57,6 +58,10 @@ $config = [
                 'api/readers' => 'api/reader/index',
                 'api/books' => 'api/book/index',
                 'api/ratings' => 'api/rating/index',
+
+                'api/book/<id:\d+>' => 'api/book/view',
+                'api/reader/<id:\d+>' => 'api/reader/view',
+
 
                 '<_c:[\w\-]+>/<_a:[\w\-]+>' => '<_c>/<_a>',
                 '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
