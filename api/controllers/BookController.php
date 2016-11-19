@@ -17,9 +17,17 @@ use yii\filters\AccessControl;
  */
 class BookController extends ActiveController
 {
+    /**
+     * @var string
+     */
     public $modelClass = 'app\models\Book';
 
 
+    /**
+     * Controller behaviors description
+     * 
+     * @return array
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();

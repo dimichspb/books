@@ -20,6 +20,11 @@ class ReaderController extends ActiveController
     public $modelClass = 'app\models\Reader';
 
 
+    /**
+     * Controller behaviors description
+     * 
+     * @return array
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();

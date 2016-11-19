@@ -6,8 +6,20 @@ use yii\data\ArrayDataProvider;
 use yii\httpclient\Client;
 use yii\web\Controller;
 
+/**
+ * Class ApiController contains implementation of Books API access
+ * 
+ * @package app\controllers
+ */
 abstract class ApiController extends Controller
 {
+    /**
+     * Get Index from API
+     * 
+     * @param $url
+     * @param $model
+     * @return ArrayDataProvider
+     */
     protected function getIndex($url, $model)
     {
         if (!is_string($url) || !is_string($model)) {
@@ -38,7 +50,14 @@ abstract class ApiController extends Controller
 
         return $dataProvider;
     }
-    
+
+    /**
+     * Get View from API
+     * 
+     * @param $url
+     * @param $model
+     * @return mixed
+     */
     protected function getOne($url, $model)
     {
         if (!is_string($url) || !is_string($model)) {

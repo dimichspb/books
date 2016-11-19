@@ -20,6 +20,11 @@ class RatingController extends ActiveController
     public $modelClass = 'app\models\Rating';
 
 
+    /**
+     * Controller behaviors description
+     * 
+     * @return array
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -37,6 +42,11 @@ class RatingController extends ActiveController
         return $behaviors;
     }
 
+    /**
+     * Change default controller's actions
+     * 
+     * @return array
+     */
     public function actions()
     {
         $actions = parent::actions();
