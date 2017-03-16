@@ -2,6 +2,7 @@
 
 namespace app\api\controllers;
 
+use app\models\RatingSearch;
 use Yii;
 use yii\rest\ActiveController;
 use yii\web\Response;
@@ -50,8 +51,26 @@ class RatingController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        $actions['index']['prepareDataProvider'] = [new $this->modelClass, 'getRatingsByParams']; // replacing default DataProvider
+        $actions['index']['prepareDataProvider'] = [$this, 'getRatingsByQueryParams']; // replacing default DataProvider
         return $actions;
+    }
+
+    /**
+     * Search Rating by params
+     *
+     * @param \yii\rest\Action $action
+     * @return \yii\data\ActiveDataProvider
+     */
+    public static function getRatingsByQueryParams($action)
+    {
+        $params = [
+            'RatingSearch' => Yii::$app->request->queryParams
+        ];
+
+        $searchModel = new RatingSearch();
+        $dataProvider = $searchModel->search($params);
+
+        return $dataProvider;
     }
 
 }

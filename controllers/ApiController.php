@@ -5,6 +5,7 @@ namespace app\controllers;
 use yii\data\ArrayDataProvider;
 use yii\httpclient\Client;
 use yii\web\Controller;
+use yii;
 
 /**
  * Class ApiController contains implementation of Books API access
@@ -17,17 +18,17 @@ abstract class ApiController extends Controller
      * Get Index from API
      * 
      * @param $url
-     * @param $model
+     * @param $modelClass
      * @return ArrayDataProvider
      */
-    protected function getIndex($url, $model)
+    protected function getIndex($url, $modelClass)
     {
-        if (!is_string($url) || !is_string($model)) {
+        if (!is_string($url) || !is_string($modelClass)) {
             throw new \BadMethodCallException('both parameters must be string');
         }
 
-        if (!class_exists($model)) {
-            throw new \BadMethodCallException("Class $model doesn't exist");
+        if (!class_exists($modelClass)) {
+            throw new \BadMethodCallException("Class $modelClass doesn't exist");
         }
 
         $client = new Client(['baseUrl' => 'http://books.dev']);
@@ -37,8 +38,10 @@ abstract class ApiController extends Controller
 
         if ($modelsResponse->isOk) {
             foreach ($modelsResponse->data as $modelData) {
-                $models[] = new $model($modelData);
+                $models[] = new $modelClass($modelData);
             }
+        } else {
+            Yii::$app->session->addFlash('warning', 'API Response: ' . $modelsResponse->toString());
         }
 
         $dataProvider = new ArrayDataProvider([
@@ -55,21 +58,29 @@ abstract class ApiController extends Controller
      * Get View from API
      * 
      * @param $url
-     * @param $model
+     * @param $modelClass
      * @return mixed
      */
-    protected function getOne($url, $model)
+    protected function getOne($url, $modelClass)
     {
-        if (!is_string($url) || !is_string($model)) {
+        if (!is_string($url) || !is_string($modelClass)) {
             throw new \BadMethodCallException('both parameters must be string');
         }
 
-        if (!class_exists($model)) {
-            throw new \BadMethodCallException("Class $model doesn't exist");
+        if (!class_exists($modelClass)) {
+            throw new \BadMethodCallException("Class $modelClass doesn't exist");
         }
 
         $client = new Client(['baseUrl' => 'http://books.dev']);
         $modelResponse = $client->get($url)->send();
-        return new $model($modelResponse->data);
+
+        if ($modelResponse->isOk) {
+            $model = new $modelClass($modelResponse->data);
+        } else {
+            Yii::$app->session->addFlash('warning', 'API Response: ' . $modelResponse->toString());
+            $model = new $modelClass();
+        }
+
+        return $model;
     }
 }

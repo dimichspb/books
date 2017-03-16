@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "bxbookratings".
@@ -48,7 +49,7 @@ class Rating extends \yii\db\ActiveRecord
     /**
      * Returns Location of the Rating's Reader
      *
-     * @return $this
+     * @return ActiveQuery
      */
     public function getLocation()
     {
@@ -58,7 +59,7 @@ class Rating extends \yii\db\ActiveRecord
     /**
      * Returns City of the Reader's Location
      *
-     * @return $this
+     * @return ActiveQuery
      */
     public function getCity()
     {
@@ -68,7 +69,7 @@ class Rating extends \yii\db\ActiveRecord
     /**
      * Returns State of the Reader's Location
      *
-     * @return $this
+     * @return ActiveQuery
      */
     public function getState()
     {
@@ -78,7 +79,7 @@ class Rating extends \yii\db\ActiveRecord
     /**
      * Returns Country of the Reader's Location
      *
-     * @return $this
+     * @return ActiveQuery
      */
     public function getCountry()
     {
@@ -103,22 +104,5 @@ class Rating extends \yii\db\ActiveRecord
     public function getBook()
     {
         return $this->hasOne(Book::className(), ['ISBN' => 'ISBN']);
-    }
-
-    /**
-     * Search Rating by params
-     *
-     * @return \yii\data\ActiveDataProvider
-     */
-    public static function getRatingsByParams()
-    {
-        $params = [
-            'RatingSearch' => Yii::$app->request->queryParams
-        ];
-
-        $searchModel = new RatingSearch();
-        $dataProvider = $searchModel->search($params);
-        
-        return $dataProvider;
     }
 }
